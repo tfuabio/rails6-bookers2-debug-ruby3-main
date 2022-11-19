@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     else
       @books = @user.books
       @book = Book.new
-      render "show"
+      render "edit"
     end
   end
 
