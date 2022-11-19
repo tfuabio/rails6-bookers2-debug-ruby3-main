@@ -1,0 +1,8 @@
+<% if errorinfo.errors.any? %>
+  <%= errorinfo.errors.count %> errors prohibited this book from being saved:
+  <ul>
+    <% errorinfo.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
