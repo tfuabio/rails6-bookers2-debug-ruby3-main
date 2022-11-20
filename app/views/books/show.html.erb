@@ -27,6 +27,15 @@
           <% end %>
         </tr>
       </table>
+      <% @book.book_comments.each do |book_comment| %>
+        <%= image_tag book_comment.user.get_profile_image %>
+        <%= book_comment.user.name %>
+        <%= book_comment.comment %>
+      <% end %>
+      <%= form_with model: [@book, @comment] do |f| %>
+        <%= f.text_area :comment %>
+        <%= f.submit '送信' %>
+      <% end %>
     </div>
   </div>
 </div>
