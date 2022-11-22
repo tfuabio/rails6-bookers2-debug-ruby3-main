@@ -1,20 +1,28 @@
 <table class='table'>
   <tr><%= image_tag user.get_profile_image(100,100) %></tr>
   <tr>
-	  <th>name</th>
-	  <th><%= user.name %></th>
+    <th>name</th>
+    <th><%= user.name %></th>
   </tr>
   <tr>
-	  <th>introduction</th>
-	  <th><%= user.introduction %></th>
+    <th>introduction</th>
+    <th><%= user.introduction %></th>
   </tr>
   <tr>
-	  <th>follows</th>
-	  <th><%= user.followings.count %></th>
+    <th>follows</th>
+    <th>
+      <%= link_to user_followings_path(user) do %>
+        <%= user.followings.count %>
+      <% end %>
+    </th>
   </tr>
   <tr>
-	  <th>followers</th>
-	  <th><%= user.followers.count %></th>
+    <th>followers</th>
+    <th>
+      <%= link_to user_followers_path(user) do %>
+        <%= user.followers.count %>
+      <% end %>
+    </th>
   </tr>
 </table>
 
