@@ -1,0 +1,10 @@
+<table class="table table-hover table-inverse">
+  <% if @range == "User" %>
+    <h2>ユーザー検索結果（<%= @word %>）</h2>
+    <%= render 'users/index', users: @users %>
+  <% else %>
+    <h2>投稿検索結果（<%= @word %>）</h2>
+    <%= render 'books/index', books: @books %>
+  <% end %>
+</table>
+
