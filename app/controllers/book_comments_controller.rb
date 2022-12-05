@@ -3,13 +3,19 @@ class BookCommentsController < ApplicationController
     @book = Book.find(params[:book_id])
     comment = current_user.book_comments.new(book_comment_params)
     comment.book_id = @book.id
-    comment.save
-    # redirect_to book_path(book.id)
+    if comment.save
+      flash.now[:notice] = 'コメントを投稿しました'
+      render :book_comments
+    else
+      render 'books/show'
+    end
   end
 
   def destroy
     BookComment.find(params[:id]).destroy
-    # redirect_to book_path(params[:book_id])
+    flash.now[:notice] = 'コメントを削除しました'
+    @book = Book.find(params[:book_id]) # Ajax処理用
+    render :book_comments
   end
 
   private

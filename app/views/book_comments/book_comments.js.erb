@@ -1,4 +1,5 @@
 $(function(){
   $("#book_comments_area").html("<%= j(render 'book_comments/index', book: @book) %>");
   $("#book_comment_comment").val('');
+  $("#notice").html("<%= j(notice) %>");
 });
