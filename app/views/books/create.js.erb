@@ -1,7 +1,0 @@
-$(function(){
-  $("#books_index_area").html("<%= j(render 'index', books: @books) %>");
-  $("#book_title").val('');
-  $("#book_body").val('');
-  $("#notice").html("<%= j(notice) %>");
-  $("#error_area").html("<%= j(render 'errorinfo',  errorinfo: @book) %>");
-});
