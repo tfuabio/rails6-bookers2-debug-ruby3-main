@@ -18,8 +18,10 @@ class BooksController < ApplicationController
     @books = Book.all # ajax対応用
     if @book.save
       #redirect_to book_path(@book.id), notice: "You have created book successfully."
+      flash.now[:notice] = 'You have created book successfully.'
+      render :create
     else
-      render 'index'
+      render :error
     end
   end
 
