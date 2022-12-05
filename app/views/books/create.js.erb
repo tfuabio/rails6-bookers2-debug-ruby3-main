@@ -1,0 +1,5 @@
+$(function(){
+  $("#books_index_area").html("<%= j(render 'index', books: @books) %>");
+  $("#book_title").val('');
+  $("#book_body").val('');
+});
