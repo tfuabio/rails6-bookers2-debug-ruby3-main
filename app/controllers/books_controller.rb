@@ -9,7 +9,7 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    @books = Book.all
+    @books = Book.all  # 過去１週間でいいねの多い順にしたい
   end
 
   def create

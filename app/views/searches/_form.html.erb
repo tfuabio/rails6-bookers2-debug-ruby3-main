@@ -1,12 +1,10 @@
 <% if user_signed_in? %>
   <div style="padding: 2px; display: flex; justify-content: center;">
     <%= form_with url: search_path, local: true, method: :get do |f| %>
-      検索:
       <%= f.text_field :word, autocomplete: "ここへ入力して検索！" %>
-      検索対象：
+      <%= f.select :search, options_for_select([["と一致する","perfect_match"], ["から始まる","forward_match"],  ["で終わる","backward_match"], ["を含む","partial_match"]], "partial_match") %>
       <%= f.select :range, options_for_select( { 'ユーザー' => 'User', '投稿' => 'Book' }, 'Book') %>
-      検索方法：
-      <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]], "partial_match") %>
+      を
       <%= f.submit "検索", class: "submit-btn" %>
     <% end %>
   </div>
