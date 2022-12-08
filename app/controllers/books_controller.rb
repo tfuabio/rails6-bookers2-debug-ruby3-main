@@ -9,7 +9,32 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    @books = Book.all  # 過去１週間でいいねの多い順にしたい
+
+    # 過去１週間でいいねの多い順にしたい
+    # @books = Book.all
+    to  = Time.current.at_end_of_day
+    from  = (to - 6.day).at_beginning_of_day
+
+    # 全ての投稿をいいねの多い順にする
+    # @books = Book.all.sort_by {|x| x.favorites.count}.reverse
+    # @books = Book.includes(:favorites).sort_by {|x| x.favorites.count}.reverse
+
+    # 過去一週間の投稿だけを表示
+    # @books = Book.where(created_at: from..to)
+
+    # 過去一週間の投稿だけをいいねの多い順に表示
+    @books = Book.where(created_at: from..to).sort_by {|x| x.favorites.count}.reverse
+
+    # 過去一週間の投稿をいいねの多い順に表示？正解か不明。
+    # @books = Book.includes(:favorites).sort_by {|x| x.favorites.where(created_at: from..to).count}.reverse
+    # @books = Book.all.sort_by {|x| x.favorites.where(created_at: from..to).count}.reverse
+
+    # コピペコード
+    # @books = Book.includes(:favorited_users).
+    #   sort {|a,b|
+    #     b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
+    #     a.favorited_users.includes(:favorites).where(created_at: from...to).size
+    #   }
   end
 
   def create
