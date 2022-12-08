@@ -14,6 +14,8 @@
           <%= link_to(book.user) do %>
             <%= image_tag book.user.get_profile_image(50,50) %>
           <% end %>
+          <br>
+          <%= book.created_at %>
         </td>
         <td><%= link_to book.title, book %></td>
         <td><%= book.body %></td>
