@@ -15,9 +15,9 @@ class BooksController < ApplicationController
     to  = Time.current.at_end_of_day
     from  = (to - 6.day).at_beginning_of_day
 
-    # 検証用
-    @to  = Time.current.at_end_of_day
-    @from  = (to - 6.day).at_beginning_of_day
+    # # 検証用
+    # @to  = Time.current.at_end_of_day
+    # @from  = (to - 6.day).at_beginning_of_day
 
     # 過去一週間のいいねが多い順に表示
     # @books = Book.all.sort_by {|x| x.favorites.where(created_at: from..to).count}.reverse

@@ -21,6 +21,7 @@
           <%= render 'favorites/favorite-btn', book: book %>
 
           <!--検証用-->
+          <% if false %>
           <%= book.favorites.where(created_at: @from...@to).size %>件OK<br>
           <% book.favorites.each do |favorite| %>
             <% if favorite.created_at < @to && favorite.created_at > @from %>
@@ -28,6 +29,7 @@
             <% else %>
               NO: <%= favorite.created_at %><br>
             <% end %>
+          <% end %>
           <% end %>
 
         </td>
