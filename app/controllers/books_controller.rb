@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def show
@@ -11,23 +12,17 @@ class BooksController < ApplicationController
     @book = Book.new
 
     # 本の投稿一覧ページで、過去一週間でいいねの合計カウントが多い順に投稿を表示
-    # →過去一週間より前の投稿はどのように表示する・・？？
     to  = Time.current.at_end_of_day
     from  = (to - 6.day).at_beginning_of_day
 
-    # 全ての投稿をいいねの多い順にする
-    # @books = Book.all.sort_by {|x| x.favorites.count}.reverse
-    @books = Book.includes(:favorites).sort_by {|x| x.favorites.count}.reverse
+    # 検証用
+    @to  = Time.current.at_end_of_day
+    @from  = (to - 6.day).at_beginning_of_day
 
-    # 過去一週間の投稿だけを表示
-    # @books = Book.where(created_at: from...to)
-
-    # 過去一週間の投稿だけをいいねの多い順に表示
-    # @books = Book.where(created_at: from...to).sort_by {|x| x.favorites.count}.reverse
-
-    # 過去一週間の投稿をいいねの多い順に表示？正解か不明。
-    # @books = Book.all.sort_by {|x| x.favorites.where(created_at: from...to).count}.reverse
-    # @books = Book.includes(:favorites).sort_by {|x| x.favorites.where(created_at: from...to).count}.reverse
+    # 過去一週間のいいねが多い順に表示
+    # @books = Book.all.sort_by {|x| x.favorites.where(created_at: from..to).count}.reverse
+    # @books = Book.includes(:favorites).sort_by {|x| x.favorites.where(created_at: from..to).count}.reverse
+    @books = Book.includes(:favorites).sort_by {|x| x.favorites.where(created_at: from...to).size}.reverse
 
     # 正解サンプルコード
     # @books = Book.all.sort {|a,b|
